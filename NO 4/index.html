@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD NO 4</title>
+</head>
+<body>
+
+    <select id="imageSelect">
+        <option value="https://asset.kompas.com/crops/78NjPguTP8OK9DYYPjdY3AmPj00=/0x0:1500x1000/750x500/data/photo/2020/08/14/5f3615920efd9.jpg">Gambar 1</option>
+        <option value="https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2021/03/02/88d40aa2-715d-46fa-8a14-c93197c63987-1614692773842-c2806f604d37eb77321ad126cf294dec.jpg">Gambar 2</option>
+        <option value="https://www.inilah.com/_next/image?url=https%3A%2F%2Fc.inilah.com%2Freborn%2F2024%2F06%2FPesona_keindahan_Gunung_Prau_22772f33d1.jpg&w=1920&q=75">Gambar 3</option>
+    </select>
+
+    <select id="opacitySelect">
+        <option value="1">1</option>
+        <option value="0.5">0.5</option>
+        <option value="0.2">0.2</option>
+    </select>
+
+    <input type="submit" value="Ubah" onclick="changeImageAndOpacity()">
+
+    <br><br>
+
+    <img id="imageDisplay" src="https://www.inilah.com/_next/image?url=https%3A%2F%2Fc.inilah.com%2Freborn%2F2024%2F06%2FPesona_keindahan_Gunung_Prau_22772f33d1.jpg&w=1920&q=75" alt="Selected Image" style="opacity: 1; width: 300px;">
+
+    <script>
+        function changeImageAndOpacity() {
+            var imageSelect = document.getElementById("imageSelect");
+            var opacitySelect = document.getElementById("opacitySelect");
+            var imageDisplay = document.getElementById("imageDisplay");
+            var selectedImage = imageSelect.value;
+            var selectedOpacity = opacitySelect.value;
+
+            imageDisplay.src = selectedImage;
+            imageDisplay.style.opacity = selectedOpacity;
+        }
+    </script>
+
+</body>
+</html>

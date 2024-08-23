@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        /* .Hidup-Mati {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}
+
+.Hidup-Mati input[type="text"],
+.Hidup-Mati select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+}
+.Hidup-Mati input[type="number"],
+.Hidup-Mati select {
+    margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+}
+
+#wrapper input[type="text"] {
+    margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+} */
+
+*{
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.Hidup-Mati {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.Hidup-Mati input[type="text"],
+.Hidup-Mati select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.Hidup-Mati input[type="number"],
+.Hidup-Mati select {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+}
+
+#wrapper input[type="text"] {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+    margin: 0 10px;
+}
+    </style>
+</head>
+<body>
+    <form action="">
+        <label for="">Status Ayah</label>
+        <div>
+            <input type="radio" name="status" id="Idup" value="Idup" onclick="ChangeForm(this)">
+            <label for="">Masih Hidup</label>
+        </div>
+        <div>
+            <input type="radio" name="status" id="die" value="die" onclick="ChangeForm(this)">
+            <label for="">Meninggal</label>
+        </div>
+        <div>
+            <input type="radio" name="status" id="unknown" value="unknown" onclick="ChangeForm(this)">
+            <label for="">Tidak diketahui</label>
+        </div>
+        <div class="Hidup-Mati">
+
+            <div>
+                <label for="">Pendidikan</label>
+                <select>
+                    <option value="">Pilih Pendidikan</option>
+                    <option value="PNS">SD</option>
+                    <option value="Wirausaha">SMP</option>
+                    <option value="Swasta">SMK</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                    <option value="S3">S3</option>
+
+                </select>
+            </div>
+        <div>
+            <label for="">Nama Ayah</label>
+            <input type="text" placeholder="Masukkan Nama Ayah">
+        </div>
+        <div>
+            <label for="">Pilih pekerjaan</label>
+            <select>
+                <option value="">Pilih Pekerjaan</option>
+                <option value="PNS">PNS</option>
+                <option value="Wirausaha">Wirausaha</option>
+                <option value="Swasta">Swasta</option>
+                <option value="S1">TNI</option>
+                <option value="S2">Programmer</option>
+                <option value="S3">Full Stack</option>
+
+            </select>
+        </div>
+        <div>
+            <label for="">Deskripsi Pekerjaan</label>
+            <input type="text" placeholder="Deskripsi Pekerjaan">
+        </div>
+        <div>
+            <label for="">Penghasilan</label>
+            <input type="text" id="dengan-rupiah" >
+        </div>
+    </div>
+
+        <div id="wrapper"></div>
+    </form>
+
+    <script>
+        function ChangeForm(e) {
+          const hidupMatiDiv = document.querySelector('.Hidup-Mati');
+            const Wrapper = document.getElementById('wrapper');
+
+     if (hidupMatiDiv) {
+            if (e.value === "Idup") {
+          hidupMatiDiv.style.display = "block";
+          document.getElementById('wrapper').innerHTML = `
+                    <input type="text" placeholder="Detail ayah bekerja/berapa lama bekerja">
+                `;
+                Wrapper.style.display = "block";
+     } else if ( e.value === "die"){
+             hidupMatiDiv.style.display = "block";
+             document.getElementById('wrapper').innerHTML = `
+                    <input type="text" placeholder="Detail Pekerjaan ayah semasa hidup">
+                `;
+                Wrapper.style.display = "block";
+     } else {
+              hidupMatiDiv.style.display = "none";
+              Wrapper.style.display = "none";
+    }
+  }
+}
+
+var dengan_rupiah = document.getElementById('dengan-rupiah');
+    dengan_rupiah.addEventListener('keyup', function(e)
+    {
+        dengan_rupiah.value = formatRupiah(this.value, 'Rp. ');
+    });
+    
+    /* Fungsi */
+    function formatRupiah(angka, prefix)
+    {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split    = number_string.split(','),
+            sisa     = split[0].length % 3,
+            rupiah     = split[0].substr(0, sisa),
+            ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+            
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+
+    </script>
+</body>
+</html>
